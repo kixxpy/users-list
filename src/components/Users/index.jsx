@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton } from './Skeleton';
 import { User } from './User';
 
-export const Users = ({ items, isLoading, searchValue, setSearchValue, onClickInvite, invites }) => {
+export const Users = ({ items, isLoading, searchValue, setSearchValue, onClickInvite, invites, setSuccess }) => {
 	return (
 		<>
 			<div className="search">
@@ -33,11 +33,11 @@ export const Users = ({ items, isLoading, searchValue, setSearchValue, onClickIn
 							);
 						})
 						.map((obj) => (
-							<User isInvited={invites.includes(obj.id)} key={obj.id} {...obj} />
+							<User onClickInvite={onClickInvite} isInvited={invites.includes(obj.id)} key={obj.id} {...obj} />
 						))}
 				</ul>
 			)}
-			<button className="send-invite-btn">Отправить приглашение</button>
+			{invites.length > 0 && <button onClick={setSuccess} className="send-invite-btn">Отправить приглашение</button>}
 		</>
 	);
 };

@@ -9,6 +9,7 @@ import axios from 'axios';
 function App() {
 	const [users, setUsers] = React.useState([]);
 	const [isLoading, setIsLoading] = React.useState(true);
+	const [success, setSuccess] = React.useState(false);
 	const [invites, setInvites] = React.useState([]);
 	const [searchValue, setSearchValue] = React.useState('');
 
@@ -36,15 +37,19 @@ function App() {
 	};
 	return (
 		<div className="App">
-			<Users
-				items={users}
-				isLoading={isLoading}
-				searchValue={searchValue}
-				setSearchValue={setSearchV}
-				onClickInvite={onClickInvite}
-				invites={invites}
-			/>
-			{/* <Success /> */}
+			{success ? (
+				<Success count={invites.length} />
+			) : (
+				<Users
+					items={users}
+					isLoading={isLoading}
+					searchValue={searchValue}
+					setSearchValue={setSearchV}
+					onClickInvite={onClickInvite}
+					invites={invites}
+					setSuccess={setSuccess}
+				/>
+			)}
 		</div>
 	);
 }
